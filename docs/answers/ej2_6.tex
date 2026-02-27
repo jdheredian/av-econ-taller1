@@ -1,0 +1,27 @@
+\begin{tcolorbox}
+Al cambiar de clusterizar por colegio a clusterizar por condado, los clusters se vuelven más grandes (agrupan varios colegios). El estimador de varianza agrega los residuos ponderados de todos los colegios dentro de cada condado antes de cuadrarlos. Si hay correlación positiva entre los residuos ponderados de colegios del mismo condado (lo que ocurre cuando colegios del mismo condado comparten características no observadas), la varianza clusterizada por condado puede ser mayor que la de colegio. Sin embargo, el número de clusters cae (de 1,000 colegios a 200 condados o 50 estados), lo que reduce la precisión del estimador de varianza clusterizado y puede producir resultados no monótonos.
+
+Así, la siguiente tabla muestra los errores estándar del efecto de tener un profesor negro sobre el puntaje SAT bajo distintos niveles de agrupación.
+
+\begin{center}
+\small
+\begin{tabular}{lr}
+\hline
+ & SAT Matemáticas \\
+\hline
+Tiene prof. negro & $4.6072^{***}$ \\
+(SE Robusto HC1) & (0.0640) \\
+{[SE Cluster colegio]} & [0.0649] \\
+{[SE Cluster condado]} & [0.0667] \\
+{[SE Cluster estado]} & [0.0598] \\
+$N$ & 99{,}204 \\
+\hline
+\multicolumn{2}{l}{\footnotesize *** p$<$0.01. SE robustos entre paréntesis; SE clusterizados entre corchetes.}\\
+\hline
+\end{tabular}
+\end{center}
+
+El coeficiente estimado es $\hat\beta_1 = 4.61$ en todos los casos (el estimador MCO no cambia con el tipo de error estándar). Los errores estándar son: HC1 = 0.0640, colegio = 0.0649, condado = 0.0667 y estado = 0.0598.
+
+Los errores estándar clusterizados por colegio y condado son ligeramente mayores al HC1, lo que es consistente con la presencia de correlación intra-cluster positiva en esos niveles. Sin embargo, el error estándar a nivel de estado es menor al de colegio o condado, lo que puede explicarse por el bajo número de clusters (50 estados): con pocos clusters, el estimador de varianza clusterizado tiene alta varianza propia y la corrección de muestra finita puede producir resultados irregulares. Esto muestra que la varianza clusterizada no aumenta de forma monótona con el nivel de agregación: el número de clusters y la correlación intra-cluster a cada nivel determinan conjuntamente el resultado.
+\end{tcolorbox}

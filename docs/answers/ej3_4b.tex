@@ -1,0 +1,25 @@
+\begin{tcolorbox}
+Los resultados de las regresiones de balance se presentan a continuación:
+
+\begin{center}
+\small
+\begin{tabular}{lrrrrr}
+\hline
+Variable & Coef. & (SE) & p-valor & Media control & N \\
+\hline
+Edad de la mujer & 0.156 & (0.150) & 0.300 & 28.26 & 8{,}687 \\
+Esposo polígamo & 0.030 & (0.020) & 0.139 & 0.437 & 8{,}689 \\
+Hijos deseados & 0.056 & (0.067) & 0.398 & 5.969 & 7{,}855 \\
+Uso anticonceptivo moderno & $-0.013$ & (0.014) & 0.343 & 0.324 & 8{,}680 \\
+Necesidad insatisfecha & 0.004 & (0.015) & 0.782 & 0.385 & 8{,}682 \\
+No podría pagar & $0.032^*$ & (0.017) & 0.065 & 0.381 & 7{,}873 \\
+El hogar tiene radio & 0.033 & (0.020) & 0.102 & 0.478 & 8{,}686 \\
+\hline
+\multicolumn{6}{l}{\footnotesize $F$ conjunto $= 1.705$ (p-valor $= 0.117$). *** p$<$0.01, ** p$<$0.05, * p$<$0.1.} \\
+\multicolumn{6}{l}{\footnotesize SE clusterizados a nivel de CSPS. Efectos fijos de provincia incluidos.} \\
+\hline
+\end{tabular}
+\end{center}
+
+Para cada variable se estimó la regresión $X_i = \alpha + \beta \cdot D_i + \gamma_{\text{provincia}} + \varepsilon_i$ con errores estándar clusterizados a nivel de centro de salud (CSPS). La tabla reporta el coeficiente del tratamiento, el error estándar entre paréntesis, el valor-p, la media del grupo de control y el tamaño muestral. El estadístico $F$ conjunto para la hipótesis nula de que todos los coeficientes son cero es $F = 1.705$ (p-valor $= 0.117$).
+\end{tcolorbox}

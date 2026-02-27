@@ -1,0 +1,138 @@
+\begin{tcolorbox}[breakable]
+Para el modelo $Y_i = \beta X_i + \varepsilon_i$ (sin intercepto), el estimador MCO es
+\[
+\hat\beta = \frac{\sum_i x_i Y_i}{\sum_i x_i^2}.
+\]
+Sustituyendo $Y_i = \beta x_i + \varepsilon_i$:
+\begin{align*}
+\hat\beta
+  &= \frac{\sum_i x_i(\beta x_i + \varepsilon_i)}{\sum_i x_i^2}\\
+  &= \frac{\beta\sum_i x_i^2 + \sum_i x_i\varepsilon_i}{\sum_i x_i^2}\\
+  &= \beta + \frac{\sum_i x_i\varepsilon_i}{\sum_i x_i^2},
+\end{align*}
+de modo que el error de estimación es
+\[
+\hat\beta - \beta = \frac{\sum_i x_i\varepsilon_i}{\sum_i x_i^2}.
+\]
+
+Aplicando el operador de varianza y como $x_i$ es no estocástico, $(\sum_i x_i^2)^2$ es una constante y puede sacarse de la esperanza:
+\begin{align*}
+\mathbb{V}[\hat\beta]
+  &= \mathbb{E}\!\left[(\hat\beta - \beta)^2\right]
+   = \mathbb{E}\!\left[\left(\frac{\sum_i x_i\varepsilon_i}{\sum_i x_i^2}\right)^{\!2}\right]
+   = \frac{\mathbb{E}\!\left[\left(\sum_i x_i\varepsilon_i\right)^{\!2}\right]}{\left(\sum_i x_i^2\right)^2}.
+\end{align*}
+Como $\mathbb{E}[\varepsilon_i] = 0$ para todo $i$, se tiene $\mathbb{E}\!\left[\sum_i x_i\varepsilon_i\right] = \sum_i x_i \mathbb{E}[\varepsilon_i] = 0$, por lo que
+\[
+\mathbb{E}\!\left[\left(\sum_i x_i\varepsilon_i\right)^{\!2}\right]
+  = \mathbb{V}\!\left[\sum_i x_i\varepsilon_i\right].
+\]
+Expandiendo la varianza por la propiedad $\mathbb{V}[A+B] = \mathbb{V}[A] + \mathbb{V}[B] + 2\,\mathrm{Cov}(A,B)$, aplicada iterativamente:
+\[
+\mathbb{V}\!\left[\sum_i x_i\varepsilon_i\right]
+  = \sum_i \mathbb{V}[x_i\varepsilon_i]
+    + 2\sum_{i < j} \mathrm{Cov}(x_i\varepsilon_i,\, x_j\varepsilon_j).
+\]
+Como $x_i$ es una constante, $\mathbb{V}[x_i\varepsilon_i] = x_i^2\,\mathbb{V}[\varepsilon_i]$ y $\mathrm{Cov}(x_i\varepsilon_i, x_j\varepsilon_j) = x_i x_j\,\mathrm{Cov}(\varepsilon_i,\varepsilon_j)$. Esto puede escribirse como:
+\[
+\mathbb{V}\!\left[\sum_i x_i\varepsilon_i\right]
+  = \sum_i\sum_j x_i x_j\,\mathrm{Cov}(\varepsilon_i,\varepsilon_j).
+\]
+Sustituyendo, la varianza es:
+\[
+\mathbb{V}[\hat\beta]
+  = \frac{\displaystyle\sum_i\sum_j x_i x_j\,\mathrm{Cov}(\varepsilon_i,\varepsilon_j)}{\left(\sum_i x_i^2\right)^2}.
+\tag{$*$}
+\]
+Los tres casos se diferencian por el supuesto sobre $\mathrm{Cov}(\varepsilon_i,\varepsilon_j)$.
+
+\medskip
+\textbf{Caso 1: homocedasticidad y no-correlación.}
+
+Partiendo de los supuestos
+\[
+\mathbb{V}[\varepsilon_i] = \sigma^2 \quad \forall\, i,
+\qquad
+\mathrm{Cov}(\varepsilon_i,\varepsilon_j) = 0 \quad \forall\, i \neq j.
+\]
+En la suma los términos con $i \neq j$ se anulan porque $\mathrm{Cov}(\varepsilon_i,\varepsilon_j)=0$. Solo se computan los términos diagonales $i = j$, donde $\mathrm{Cov}(\varepsilon_i,\varepsilon_i) = \mathbb{V}[\varepsilon_i] = \sigma^2$:
+\begin{align*}
+\mathbb{V}[\hat\beta]
+  &= \frac{\displaystyle\sum_i x_i^2\,\sigma^2}{\left(\sum_i x_i^2\right)^2}
+   = \frac{\sigma^2\,\sum_i x_i^2}{\left(\sum_i x_i^2\right)^2}
+   = \frac{\sigma^2}{\sum_i x_i^2}.
+\end{align*}
+
+\textbf{Estimando poblacional:} $\dfrac{\sigma^2}{\sum_i x_i^2}$.
+
+\textbf{Estimador:} $\sigma^2$ no es observable, pero puede estimarse de forma insesgada con los residuos MCO:
+\[
+\hat{\sigma}^2 = \frac{\sum_i \hat\varepsilon_i^2}{N - 1},
+\qquad
+\hat{\mathbb{V}}[\hat\beta] = \frac{\hat\sigma^2}{\sum_i x_i^2}.
+\]
+
+\medskip
+\textbf{Caso 2: heterocedasticidad, sin correlación entre individuos.}
+
+Se mantiene la no-correlación entre individuos distintos, pero ahora la varianza del error depende de $i$:
+\[
+\mathbb{V}[\varepsilon_i] = \sigma_i^2,
+\qquad
+\mathrm{Cov}(\varepsilon_i,\varepsilon_j) = 0 \quad \forall\, i \neq j.
+\]
+Los términos fuera de la diagonal siguen siendo nulos. Los términos diagonales ahora contribuyen con $\sigma_i^2$ distinto para cada $i$:
+\begin{align*}
+\mathbb{V}[\hat\beta]
+  &= \frac{\displaystyle\sum_i x_i^2\,\mathbb{V}[\varepsilon_i]}{\left(\sum_i x_i^2\right)^2}
+   = \frac{\displaystyle\sum_i x_i^2\,\sigma_i^2}{\left(\sum_i x_i^2\right)^2}.
+\end{align*}
+
+\textbf{Estimando poblacional:} $\dfrac{\sum_i x_i^2\,\sigma_i^2}{\left(\sum_i x_i^2\right)^2}$.
+
+\textbf{Estimador (White, 1980):} $\sigma_i^2 = \mathbb{V}[\varepsilon_i]$ no es observable. Usando que $\mathbb{E}[\varepsilon_i] = 0$:
+\[
+\mathbb{V}[\varepsilon_i] = \mathbb{E}[\varepsilon_i^2] - (\mathbb{E}[\varepsilon_i])^2 = \mathbb{E}[\varepsilon_i^2].
+\]
+White (1980) demostró que el residuo al cuadrado $\hat\varepsilon_i^2$ es un estimador consistente de $\mathbb{E}[\varepsilon_i^2]$, ya que $\hat\varepsilon_i \xrightarrow{p} \varepsilon_i$ cuando $N \to \infty$. Sustituyendo $\sigma_i^2$ por $\hat\varepsilon_i^2$:
+\[
+\hat{\mathbb{V}}_{\mathrm{HC}}[\hat\beta]
+  = \frac{\displaystyle\sum_i x_i^2\,\hat\varepsilon_i^2}{\left(\sum_i x_i^2\right)^2}.
+\]
+Este estimador es consistente aunque no se cumpla la homocedasticidad.
+
+\medskip
+\textbf{Caso 3: heterocedasticidad y correlación intra-colegio.}
+
+Se permite ahora que los errores de individuos en el mismo colegio $g$ estén correlacionados:
+\[
+\mathrm{Cov}(\varepsilon_i,\varepsilon_j) \neq 0 \quad \text{si } i,j \in g,
+\qquad
+\mathrm{Cov}(\varepsilon_i,\varepsilon_j) = 0 \quad \text{si } i,j \text{ en colegios distintos}.
+\]
+En la suma, los términos con $i,j$ en colegios distintos se anulan; solo contribuyen los pares dentro del mismo colegio. Reorganizando la suma por clusters $g \in \{1,\ldots,G\}$:
+\[
+\mathbb{V}[\hat\beta]
+  = \frac{\displaystyle\sum_g \sum_{i \in g}\sum_{j \in g} x_i x_j\,\mathrm{Cov}(\varepsilon_i,\varepsilon_j)}{\left(\sum_i x_i^2\right)^2}.
+\]
+Como $\mathbb{E}[\varepsilon_i] = 0$, se tiene $\mathrm{Cov}(\varepsilon_i,\varepsilon_j) = \mathbb{E}[\varepsilon_i\varepsilon_j]$. Así, el numerador del cluster $g$ puede reescribirse como, teniendo en cuenta $S_g := \sum_{i \in g} x_i\varepsilon_i$:
+\[
+\sum_{i \in g}\sum_{j \in g} x_i x_j\,\mathbb{E}[\varepsilon_i\varepsilon_j]
+  = \mathbb{E}\!\left[\Bigl(\sum_{i \in g} x_i\varepsilon_i\Bigr)^{\!2}\right]
+  = \mathbb{E}[S_g^2].
+\]
+Sustituyendo:
+\[
+\mathbb{V}[\hat\beta]
+  = \frac{\displaystyle\sum_g \mathbb{E}[S_g^2]}{\left(\sum_i x_i^2\right)^2}.
+\]
+
+\textbf{Estimando poblacional:} $\dfrac{\sum_g \mathbb{E}[S_g^2]}{\left(\sum_i x_i^2\right)^2}$.
+
+\textbf{Estimador (Liang \& Zeger, 1986):} Siguiendo la misma lógica que White, $\mathbb{E}[S_g^2]$ puede estimarse por el cuadrado del residuo ponderado agregado por cluster, $\hat{S}_g^2 = \bigl(\sum_{i \in g} x_i\hat\varepsilon_i\bigr)^2$. Sustituyendo:
+\[
+\hat{\mathbb{V}}_{\mathrm{CL}}[\hat\beta]
+  = \frac{\displaystyle\sum_g \left(\sum_{i \in g} x_i\,\hat\varepsilon_i\right)^{\!2}}{\left(\sum_i x_i^2\right)^2}.
+\]
+Este estimador es consistente en $G \to \infty$ y, al agregar los productos $x_i\hat\varepsilon_i$ antes de elevar al cuadrado, captura automáticamente tanto la heterocedasticidad como la correlación dentro de cada colegio. Además, si cada individuo forma su propio cluster ($n_g = 1$ para todo $g$), la suma doble intra-cluster se agrupa a un solo término y $\hat{\mathbb{V}}_{\mathrm{CL}}$ se reduce al estimador HC de White.
+\end{tcolorbox}

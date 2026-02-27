@@ -1,0 +1,45 @@
+\begin{tcolorbox}
+Partiendo de la definición del estimador de diferencia de medias:
+\begin{align*}
+\tau_{\text{ing}}
+  &= \mathbb{E}[Y_i \mid D_i = 1] - \mathbb{E}[Y_i \mid D_i = 0].
+\end{align*}
+Se reemplaza la ecuación  $Y_i = D_i \times Y_i(1) + (1-D_i) \times Y_i(0)$ dentro del estimador:
+\begin{align*}
+  \tau_{\text{ing}}
+  &= \mathbb{E}[D_i \times Y_i(1) + (1-D_i) \times Y_i(0) \mid D_i = 1] 
+  \\&- \mathbb{E}[D_i \times Y_i(1) + (1-D_i) \times Y_i(0) \mid D_i = 0]
+  \\
+    \tau_{\text{ing}}
+  &= \mathbb{E}[(1) \times Y_i(1) + (1-(1)) \times Y_i(0) \mid D_i = 1] 
+  \\&- \mathbb{E}[(0) \times Y_i(1) + (1-(0)) \times Y_i(0) \mid D_i = 0]
+  \\
+\tau_{\text{ing}}
+  &= \mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 0]
+\end{align*}
+
+Se suma y resta un contrafactual, concretamente $\mathbb{E}[Y_i(0) \mid D_i = 1]$ :
+\begin{align*}
+\tau_{\text{ing}}
+  &= \mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 1]
+     + \mathbb{E}[Y_i(0) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 0].
+\end{align*}
+
+Reordenando, el primer par de términos es el ATT por definición:
+\[
+\text{ATT} = \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 1]
+           = \mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 1].
+\]
+
+El segundo par de términos es el sesgo de selección:
+\[
+\text{Sesgo} = \mathbb{E}[Y_i(0) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 0].
+\]
+
+Por tanto:
+\[
+\tau_{\text{ing}} = \underbrace{\mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 1]}_{\text{ATT}} + \underbrace{\mathbb{E}[Y_i(0) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 0]}_{\text{Sesgo de selección}}.
+\]
+
+El sesgo de selección captura la diferencia en el resultado potencial sin tratamiento entre los que efectivamente se tratan y los que no. Si los estudiantes asignados al aula tecnológica hubieran tenido, en ausencia del programa, puntajes distintos a los del salón regular, entonces $\tau_{\text{ing}} \neq \text{ATT}$.
+\end{tcolorbox}

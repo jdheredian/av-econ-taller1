@@ -1,0 +1,29 @@
+\begin{tcolorbox}
+Del estimador $\hat{\mathbb{V}}_{\text{CL}}[\hat\beta] = \sum_g \left(\sum_{i \in g} x_i \hat\varepsilon_i\right)^2 / \left(\sum_i x_i^2\right)^2$, tres factores amplían la varianza estimada respecto a la robusta a heterocedasticidad:
+
+\begin{itemize}
+    \item Colegios con muestra grande ($n_g$ elevado): el residuo ponderado agregado del cluster $\sum_{i \in g} x_i \hat\varepsilon_i$ acumula más términos, lo que eleva su magnitud. En el estudio, colegios con muchos estudiantes negros en la muestra contribuirán más a la varianza estimada.
+    \item Alta correlación intra-colegio en los errores: si los factores no observados que afectan los puntajes SAT son similares dentro de un colegio (mismos recursos, misma dirección, mismas redes), los productos cruzados $x_i x_j \hat\varepsilon_i \hat\varepsilon_j$ dentro del colegio serán positivos y amplificarán el residuo ponderado agregado.
+    \item Varianza del regresor dentro del colegio: si los valores de $x_i = D_i - \bar{D}$ son grandes en magnitud dentro del colegio (alta dispersión del tratamiento dentro del colegio), los residuos ponderados individuales $x_i \hat\varepsilon_i$ son mayores.
+\end{itemize}
+
+Por otra parte, la siguiente tabla reporta los resultados de la estimación del modelo~\eqref{eq:main_spec} para los dos resultados de interés.
+
+\begin{center}
+\small
+\begin{tabular}{lrr}
+\hline
+ & SAT Matemáticas & Asistencia universitaria \\
+\hline
+Tiene prof. negro & $4.6072^{***}$ & $0.1980^{***}$ \\
+(SE Robusto HC1) & (0.0640) & (0.0030) \\
+{[SE Cluster colegio]} & [0.0649] & [0.0044] \\
+$N$ & 99{,}204 & 99{,}204 \\
+\hline
+\multicolumn{3}{l}{\footnotesize *** p$<$0.01. SE robustos entre paréntesis; SE clusterizados por colegio entre corchetes.}\\
+\hline
+\end{tabular}
+\end{center}
+
+Para el puntaje SAT en matemáticas, tener un profesor negro en kínder se asocia con un incremento de 4.61 puntos ($p<0.01$). El error estándar robusto es 0.0640 y el clusterizado a nivel de colegio es 0.0649, diferencia que sugiere una correlación intra-colegio en los errores baja pero positiva. Para la asistencia universitaria, el efecto es 19.8 puntos porcentuales ($p<0.01$). El error estándar clusterizado (0.0044) es mayor al robusto (0.0030), lo que indica mayor correlación intra-colegio en este resultado. Ambos efectos son estadísticamente significativos bajo los dos tipos de error estándar, lo que indica que los resultados son robustos a la elección del estimador de varianza.
+\end{tcolorbox}

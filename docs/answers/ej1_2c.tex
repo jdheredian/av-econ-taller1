@@ -1,0 +1,34 @@
+\begin{tcolorbox}
+Bajo la definición del ATE:
+\[
+\text{ATE} = \mathbb{E}[Y_i(1) - Y_i(0)]
+\]
+
+
+
+Y bajo la ley de esperanzas iteradas, condicionando en $D_i$:
+\begin{align*}
+\text{ATE}
+  &= \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 1]\,\frac{|\{j \in \mathbb{N} \mid D_j = 1\}|}{N}
+   + \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 0]\,\frac{|\{j \in \mathbb{N} \mid D_j = 0\}|}{N}
+\end{align*}
+\begin{align*}
+\text{ATE}
+  &= \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 1]\,\mathbb{P}(D_i = 1)
+   + \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 0]\,\mathbb{P}(D_i = 0).
+\end{align*}
+
+Reconocemos los términos por definición. El primer factor de cada sumando es, respectivamente, el ATT y el ATU:
+\[
+\text{ATT} = \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 1], \qquad
+\text{ATU} = \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 0].
+\]
+
+Definimos $\pi \equiv \mathbb{P}(D_i = 1)$, de modo que $\mathbb{P}(D_i = 0) = 1 - \pi$. Sustituyendo:
+\begin{align*}
+\text{ATE}
+  &= \text{ATT} \cdot \pi + \text{ATU} \cdot (1-\pi).
+\end{align*}
+
+Esta expresión muestra que el ATE es un promedio ponderado del ATT y el ATU, con pesos iguales a la proporción de la población en cada grupo. En el caso de estudio, $\pi = N_1/N$ es la fracción de estudiantes en el aula Tecnológica.
+\end{tcolorbox}

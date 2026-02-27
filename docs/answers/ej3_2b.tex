@@ -1,0 +1,11 @@
+\begin{tcolorbox}
+Los resultados potenciales para la mujer $i$ se definen como:
+\begin{itemize}
+    \item $Y_i(1)$: indicador de si la mujer $i$ tuvo al menos un nacimiento entre la línea base (abril 2018) y el seguimiento (junio 2021), dado que fue asignada al subsidio del 100\%.
+    \item $Y_i(0)$: indicador de si la mujer $i$ tuvo al menos un nacimiento en el mismo período, dado que fue asignada al subsidio del 10\%.
+\end{itemize}
+
+Para cada mujer existen {dos} resultados potenciales: $Y_i(1)$ y $Y_i(0)$. El principal problema de inferencia causal implica que solo uno de ellos es observable: si $D_i = 1$ se observa $Y_i = Y_i(1)$ y $Y_i(0)$ es contrafactual; si $D_i = 0$ se observa $Y_i = Y_i(0)$ y $Y_i(1)$ queda sin observar.
+
+El resultado observado se escribe $Y_i = D_i Y_i(1) + (1 - D_i) Y_i(0)$.
+\end{tcolorbox}

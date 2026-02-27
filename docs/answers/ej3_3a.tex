@@ -1,0 +1,16 @@
+\begin{tcolorbox}
+\begin{enumerate}
+    \item Independencia (aleatorización). La asignación al tratamiento es independiente de los resultados potenciales:
+    \[
+    \{Y_i(0),\, Y_i(1)\} \perp D_i.
+    \]
+    En este estudio, la aleatorización a nivel de centro de salud garantiza este supuesto dentro del diseño experimental.
+
+    \item SUTVA (Stable Unit Treatment Value Assumption). Existen dos componentes: (i) no hay interferencia entre unidades: el resultado de la mujer $i$ no depende del tratamiento asignado a otras mujeres; (ii) hay un único valor del tratamiento: $D_i = 1$ implica siempre el subsidio completo (sin versiones múltiples del tratamiento).
+    \[
+    Y_i = D_i Y_i(1) + (1 - D_i) Y_i(0).
+    \]
+
+    \item Cumplimiento completo / intención de tratar. Todos los centros de salud asignados al tratamiento implementaron efectivamente el subsidio del 100\%, y los del control el 10\%. Bajo este supuesto, el ITT coincide con el efecto del tratamiento asignado. Si hubiera incumplimiento (por ejemplo, centros de control que accedieran al subsidio completo), el ITT subestimaría el efecto causal del tratamiento en los cumplidores.
+\end{enumerate}
+\end{tcolorbox}

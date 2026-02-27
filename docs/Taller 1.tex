@@ -1,0 +1,571 @@
+% !TeX root = 202610-taller-1-enunciado.tex
+\documentclass[a4paper]{article} 
+\addtolength{\hoffset}{-2.25cm}
+\addtolength{\textwidth}{4.5cm}
+\addtolength{\voffset}{-3.25cm}
+\addtolength{\textheight}{5cm}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0in}
+
+%\linespread{1.5}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage{blindtext} % Package to generate dummy text
+\usepackage{charter} % Use the Charter font
+\usepackage[utf8]{inputenc} % Use UTF-8 encoding
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[english, spanish, es-nodecimaldot]{babel} % Language hyphenation and typographical rules
+\usepackage{amsthm, amsmath, amssymb} % Mathematical typesetting
+\usepackage{float} % Improved interface for floating objects
+\usepackage[final, colorlinks = true, 
+linkcolor = black, 
+citecolor = black]{hyperref} % For hyperlinks in the PDF
+\usepackage{graphicx, multicol} % Enhanced support for graphics
+\usepackage{xcolor} % Driver-independent color extensions
+\usepackage{marvosym, wasysym} % More symbols
+\usepackage{rotating} % Rotation tools
+\usepackage{censor} % Facilities for controlling restricted text
+\usepackage{listings} % Environment for non-formatted code
+\input{style/lstlisting} % !uses style file!
+%\usepackage{pseudocode} % Environment for specifying algorithms in a natural way
+\usepackage{style/avm} % Environment for f-structures, !uses style file!
+\usepackage{booktabs} % Enhances quality of tables
+\usepackage{tikz-qtree} % Easy tree drawing tool
+\tikzset{every tree node/.style={align=center,anchor=north},
+	level distance=2cm} % Configuration for q-trees
+\usepackage{style/btree} % Configuration for b-trees and b+-trees, !uses style file!
+\usepackage[backend=biber,style=numeric,
+sorting=nyt]{biblatex} % Complete reimplementation of bibliographic facilities
+%\addbibresource{ecl.bib}
+\usepackage{csquotes} % Context sensitive quotation facilities
+\usepackage[yyyymmdd]{datetime} % Uses YEAR-MONTH-DAY format for dates
+\renewcommand{\dateseparator}{-} % Sets dateseparator to '-'
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{}\renewcommand{\headrulewidth}{0pt} % Blank out the default header
+\fancyfoot[L]{} % Custom footer text
+\fancyfoot[C]{} % Custom footer text
+\fancyfoot[R]{\thepage} % Custom footer text
+\newcommand{\note}[1]{\marginpar{\scriptsize \textcolor{red}{#1}}} % Enables comments in red on margin
+\DeclareMathOperator*{\plim}{plim}
+\usepackage[most]{tcolorbox}
+\usepackage{cancel}
+\usepackage{adjustbox}
+\addto\captionsspanish{
+	\def\listtablename{\'Indice de tablas}%
+	\def\tablename{Tabla}}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{bbm}
+\usepackage{threeparttable}
+\usepackage{code/package}
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{moradito}{RGB}{63,1,143}
+\begin{document}
+	
+	%-------------------------------
+	%	TITULO
+	%-------------------------------
+	
+	\fancyhead[C]{}
+	\hrule \medskip 
+	\begin{minipage}{0.295\textwidth}
+		\raggedright
+		Juan Diego Heredia Niño 201813809\\
+		\small\href{https://github.com/jdheredian/av-econ-taller1}{Paquete de replicación}
+		\normalsize
+	\end{minipage}
+	\begin{minipage}{0.4\textwidth} 
+		\centering 
+		\huge 
+		Taller 1\\ 
+		\vspace{2mm}
+		\normalsize 
+		Econometría Avanzada, 2026-1\\ 
+		\textbf{Profesor:} Manuel Fernández
+	\end{minipage}
+	\begin{minipage}{0.295\textwidth} 
+		\begin{figure}[H]
+			\raggedleft
+			\includegraphics[scale=0.3]{style/uniandes.pdf}
+		\end{figure}
+		\hfill
+	\end{minipage}
+	\medskip\hrule
+	\bigskip
+
+	\noindent\small\textit{\textbf{Declaración de uso de inteligencia artificial.} En la elaboración de este trabajo se utilizó Claude (Anthropic) como herramienta de asistencia. El uso incluyó corrección de errores de codificación en \LaTeX{} y python, y sugerencias de redacción.}
+	\normalsize
+
+	\bigskip
+
+	%---------------------------------------------------------------------
+	% PREGUNTA 1
+	%---------------------------------------------------------------------
+	
+	\section*{Primer Ejercicio}
+	
+	Desde la perspectiva del capital humano, estudios como el de \href{https://www.aeaweb.org/articles?id=10.1257/aer.97.2.31}{Cunha \& Heckman (2007)} encuentran que las intervenciones durante los primeros años de escolaridad son fundamentales para el desarrollo temprano de habilidades y, con ello, para la trayectoria de aprendizaje posterior de los individuos. Una forma de evaluar el éxito de estas intervenciones es mediante el nivel de habilidades cognitivas que desarrollan los estudiantes, dado que estas capacidades constituyen la base de cualquier aprendizaje futuro. En este contexto, los gobiernos suelen mostrar interés por los programas de digitalización, ya que prometen acelerar el desarrollo del razonamiento y facilitar la adaptación al mundo moderno. Con base en lo anterior, la pregunta de investigación que guiará este ejercicio, inspirada en \href{https://publications.iadb.org/en/technology-and-child-development-evidence-one-laptop-child-program}{Cristia et al. (2012)}, es: \textit{¿cuál es el efecto de participar en un programa de tecnología educativa sobre el desarrollo de habilidades cognitivas de razonamiento abstracto?} \\
+	
+	Para responder esta pregunta, usted analizará una política implementada por la Secretaría de Educación de Macondo en conjunto con el colegio \textit{Sonrisas}, ubicado en una zona rural del país. La iniciativa buscaba transformar el modelo educativo tradicional mediante la entrega de laptops diseñadas específicamente para el aprendizaje autodidacta en entornos con limitaciones severas de infraestructura. El programa se enfocó exclusivamente en estudiantes de tercer grado de primaria, nivel que en este colegio cuenta con dos salones. El programa seleccionaba un salón para convertirlo en \textit{Aula Tecnológica}. \\
+	
+	Los estudiantes asignados al \textit{Aula Tecnológica} realizaban actividades guiadas tres veces por semana utilizando las laptops. Estas actividades se desarrollaban únicamente durante el horario de clases, las cuales fueron adaptadas para incluir ejercicios lógicos y juegos de asociación visual orientados a fortalecer el razonamiento abstracto. Cada actividad estaba vinculada con el tema correspondiente a la clase del día. Adicionalmente, los estudiantes no podían llevar las laptops a sus hogares. Los estudiantes del otro salón, por su parte, continuaron con sus clases de manera habitual. \\
+	
+	Considere una muestra de $N$ estudiantes observados en un diseño de corte transversal. Defina $Y_i$ como el puntaje del estudiante $i$ en un test de habilidades cognitivas de razonamiento abstracto. Este test se aplica anualmente a nivel nacional a estudiantes de tercer grado, está definido por el Ministerio de Educación y sus puntajes oscilan entre 0 y 100. Por otro lado, $D_i$ es una variable dicotómica que toma el valor de 1 si el estudiante $i$ fue asignado al \textit{Aula Tecnológica} y 0 en caso contrario. \\
+	
+	Para comenzar, suponga que el mecanismo de asignación al tratamiento es desconocido; es decir, no se conocen los criterios que determinaron la elección de un salón sobre el otro ni la forma en que los estudiantes son asignados a cada salón. \\
+	
+	\begin{enumerate}
+		\item Describa el problema de estimación utilizando el lenguaje de resultados potenciales. Para esto:
+		
+		\begin{enumerate}
+			\item Teniendo en cuenta el contexto presentado, defina formalmente los resultados potenciales $Y_i(1)$ y $Y_i(0)$. Luego, describa el problema de inferencia causal en este contexto.
+			
+			\input{answers/ej1_1a}
+			
+			\item Define en lenguaje matemático el ATE, el ATT y el ATU. Interprete cada uno de estos conceptos de acuerdo al contexto del caso. 
+			
+			\input{answers/ej1_1b}
+			
+		\end{enumerate} 
+		
+		\item Usted se encuentra interesada en estimar el siguiente efecto causal:
+		
+		\begin{equation}\label{EQ:q1-1}
+			\tau=E[Y_i(1)] - E[Y_i(0)]  
+		\end{equation}
+		
+		Para esto plantea una diferencia de medias ingenua:
+		
+		\begin{equation}\label{EQ:q1-2}
+			\tau_{\text{ing}} = E[Y_i|D_i = 1] - E[Y_i|D_i = 0]  
+		\end{equation}
+		
+		Muestre formalmente que:
+		
+		\begin{enumerate}
+			\item $\tau_{\text{ing}} \ = \text{ATT}+\left( \mathbb{E}[Y_{i}(0)|D_i=1]-\mathbb{E}[Y_{i}(0)|D_i=0] \right)$
+			
+			\input{answers/ej1_2a}
+			
+			\item $\tau_{\text{ing}} = \text{ATU}+\left( \mathbb{E}[Y_{i}(1)|D_i=1]-\mathbb{E}[Y_{i}(1)|D_i=0] \right)$
+			
+			\input{answers/ej1_2b}
+			
+			\item $\text{ATE}=\pi \,\text{ATT}+(1-\pi)\, \text{ATU}$ \quad donde $\pi \equiv \mathbb{P}(D_i=1)$
+			
+			\input{answers/ej1_2c}
+		\end{enumerate}
+		
+		Interprete cada expresión, haciendo énfasis en el significado de cada término. Luego responda, ¿es cierto que si $\tau_{\text{ing}} = \text{ATT}$, entonces $\tau_{\text{ing}} = \text{ATU}$? Si su respuesta es afirmativa, demuéstrelo. En caso contrario, dé un contra ejemplo de acuerdo al caso de estudio.
+		
+		\input{answers/ej1_2d} 
+		
+		\item Para encontrar el efecto causal promedio de participar en el programa de tecnología educativa sobre el resultado en el test, considere el siguiente modelo lineal:
+		
+		\begin{equation} Y_i = \beta_0 + \tau D_i + u_i. 
+		\end{equation}
+		
+		\begin{enumerate}
+			\item Demuestre que el estimador $\hat\tau_{MCO}$ coincide con la diferencia de medias entre el grupo de tratados y el grupo de no tratados. Es decir, pruebe que $\hat\tau_{\scriptsize{MCO}} = \hat\tau_{\scriptsize{DM}}$, donde
+			
+			\begin{equation*} \hat\tau_{\scriptsize{DM}} := \frac{1}{N_1}\sum_{\{i : D_i = 1\}} Y_i - \frac{1}{N_0}\sum_{\{i : D_i = 0\}} Y_i, \end{equation*}
+			
+			y $N_1=\sum_i D_i$ y $N_0=\sum_i (1-D_i)$.
+			
+			\input{answers/ej1_3a}
+			
+			\item ¿Qué supuestos deben cumplirse para que $\hat\tau_{\text{DM}}$ sea un estimador insesgado del efecto causal promedio?
+			
+			\input{answers/ej1_3b}
+			
+		\end{enumerate}
+		
+		\item Suponga ahora que la asignación de estudiantes a cada salón se realiza de manera aleatoria. De igual forma, la decisión sobre qué salón recibe el tratamiento también se tomó aleatoriamente. Además, todos los estudiantes pertenecientes al salón asignado al tratamiento efectivamente participaron en el programa. Demuestre que el estimador 
+		
+		\begin{equation*}
+			\hat\tau_{DM} \overset{p}{\longrightarrow} \mathbb{E}[Y_{i}(1) - Y_{i}(0) | D_i = 1]
+		\end{equation*}
+		
+		Puede suponer que el supuesto de SUTVA se cumple. \\
+		
+		Posteriormente, defina intuitivamente y explique la importancia de la propiedad de consistencia de un estimador.
+		
+		\input{answers/ej1_4}
+		
+	\end{enumerate} 
+	
+	
+	%---------------------------------------------------------------------
+	% PREGUNTA 2
+	%---------------------------------------------------------------------
+	\newpage
+	\section*{Segundo Ejercicio}
+	
+	Tal como señalan \href{https://academic.oup.com/qje/article-abstract/138/1/1/6750017}{Abadie
+		et al. (2022)}, los errores estándar clusterizados han adquirido un rol central en el trabajo empírico y esto no es casualidad. Si bien una parte sustancial de los esfuerzos de los investigadores se concentra en la obtención de estimadores consistentes e insesgados, resulta también fundamental poder realizar inferencia estadística válida sobre dichos estimadores. En este contexto, una de las prácticas más extendidas en la literatura empírica es el reporte de errores estándar clusterizados. No obstante, su uso plantea varias preguntas recurrentes en la práctica: ¿en qué situaciones es apropiado utilizar este tipo de errores estándar?, ¿cuándo tienen un impacto importante sobre la inferencia estadística? y ¿a qué nivel debería realizarse la clusterización? \\
+	
+	Teniendo en cuenta lo anterior, suponga que usted desea estudiar \textbf{el impacto de que un estudiante de raza negra tenga un profesor de la misma raza}. Es bien sabido que existen brechas raciales en los resultados educacionales, lo cual resulta problemático por diversas razones: la movilidad social, los ingresos futuros y el bienestar social están estrechamente vinculados al nivel educativo. En este contexto, usted decide seguir la línea de investigación propuesta por \href{https://www.aeaweb.org/articles?id=10.1257/pol.20190573}{Gershenson
+		et al. (2022)} y busca replicar algunos de sus principales resultados, en particular aquellos relacionados con el desempeño en exámenes y la entrada a la universidad. \\
+	
+	Para realizar estos ejercicios, usted dispone de una base de datos de corte transversal denominada \textit{race\_teaching.dta} que proviene de un experimento realizado en EE.UU. que aleatorizaba la raza de los profesores en diferentes salones de kínder. Sus datos están a nivel individual, donde cada observación es una persona de raza negra que participó en el experimento. \\
+	
+	Esta base contiene información sobre los resultados en el SAT (examen estandarizado para el ingreso a la universidad) y una variable indicadora que señala si el estudiante asistió a la universidad. A estas variables de interés se las denota por $Y_i$. Adicionalmente, la base incluye una variable indicadora $D_i$, que toma el valor de uno si el estudiante $i$ tuvo un profesor de raza negra en kínder y cero en caso contrario. Asimismo, se incorporan características geográficas, tales como el salón, el colegio, el condado y el estado al que pertenece cada individuo. \\
+	
+	Antes de abordar las decisiones empíricas que deberá tomar en su investigación, usted decide analizar primero, desde una perspectiva teórica, los errores estándar clusterizados. De este modo, podrá comprender su formulación, sus principales propiedades y sentar las bases para determinar en qué contextos resulta apropiado utilizarlos y cómo deben implementarse.
+	
+	\vspace{0.3cm}
+
+	Nota: Omitir variable \texttt{id\_salon} ya que no fue incluida en la base de datos
+	
+	\vspace{0.3cm}
+	
+	\begin{enumerate}
+		
+		\item Realice un análisis crítico de los supuestos de homocedasticidad y no-correlación del término de error. Para ello:
+		
+		\begin{itemize}
+			\item Defina ambos supuestos, tanto desde un punto de vista matemático como intuitivo, en el contexto del caso de estudio.
+			
+			\vspace{0.15cm}
+			
+			\item Discuta si resulta razonable asumir el cumplimiento de estos supuestos dada la pregunta de investigación. Justifique su respuesta utilizando un ejemplo intuitivo para cada supuesto.
+			
+		\end{itemize}
+		
+		\input{answers/ej2_1}
+		
+		\item Por el momento, suponga que usted desea estimar el modelo sin intercepto $Y_i = \beta X_i + \varepsilon_i$\footnote{Considere que es un modelo donde las variables $Y$ y $X$ se han re-centrado con respecto a sus medias. En general, note que eliminar el intercepto tiene consecuencias importantes si no se realiza dicho proceso.}, donde $X_i$ es una variable determinística.
+		Determine la varianza del estimador de $\beta$ bajo los siguientes escenarios:
+		
+		\begin{itemize}
+			\item \textbf{Caso 1:} Se cumplen los supuestos de homocedasticidad y no-correlación del término de error.
+			
+			\vspace{0.15cm}
+			
+			\item \textbf{Caso 2:} Se cumple el supuesto de no-correlación, pero existe heterocedasticidad.
+			
+			\vspace{0.15cm}
+			
+			\item \textbf{Caso 3:} Existe heterocedasticidad y correlación entre las características no-observadas de los individuos que asisten al mismo colegio.
+		\end{itemize}
+		
+		Para cada caso, identifique el estimando poblacional correspondiente y proponga un estimador adecuado de la varianza. Justifique brevemente su respuesta.
+		
+		\input{answers/ej2_2}
+		
+		\vspace{0.3cm}
+		
+		\item Uno de sus colegas le indica que no es necesario tener en cuenta el cluster a nivel de colegio y le propone usar la siguiente expresión como estimador de la varianza en el \textbf{caso 3}:
+		
+		\[
+		\frac{\sum_i \sum_j x_i x_j \hat{\varepsilon}_i \hat{\varepsilon}_j}{(\sum_i x_i)^2}.
+		\]
+		
+		\begin{itemize}
+			
+			\item Utilizando sus conocimientos de teoría de regresión lineal, explique brevemente por qué este estimador es inválido.
+			
+			\vspace{0.15cm}
+			
+			\item Compare el estimador que usted propuso para el \textbf{caso 3} con el que le propuso su colega. ¿Cómo soluciona su estimador el problema que identificó?
+			
+		\end{itemize}
+		
+		\input{answers/ej2_3}
+		
+		\vspace{0.3cm}
+		
+		\item ¿Compare los estimadores robustos a heterocedasticidad (\textbf{caso 2}) y robustos a clusters (\textbf{caso 3}) que usted propuso. Para ello:
+		
+		\begin{itemize}
+			
+			\item Explique por qué el estimador robusto a clusters también es robusto a heterocedasticidad.
+			
+			\vspace{0.15cm}
+			
+			\item ¿Es razonable esperar que la varianza estimada mediante el estimador robusto a clusters sea mayor que la obtenida con el estimador robusto a heterocedasticidad? Justifique su respuesta.
+			
+		\end{itemize}
+		
+		\input{answers/ej2_4}
+		
+	\end{enumerate}
+	
+	Habiendo adquirido una mayor claridad sobre la teoría detrás de los errores estándar clusterizados, usted procede a intentar replicar algunos de los resultados del trabajo de \href{https://www.aeaweb.org/articles?id=10.1257/pol.20190573}{Gershenson
+		et al. (2022)}, integrando los conocimientos sobre errores estándar clusterizados desarrollados en los incisos anteriores. \\
+	
+	En particular, recuerde que el experimento se llevó a cabo sobre estudiantes de kínder de raza negra y que la exposición a profesores de distinta raza fue aleatorizada \emph{dentro de cada colegio}, asignando estudiantes y docentes a diferentes salones.\footnote{Una ilustración intuitiva de este contexto puede verse en la serie \textit{Abbott Elementary}, que retrata un colegio con una población estudiantil predominantemente negra cuyos docentes pertenecen a distintas razas.} El experimento se implementó en múltiples condados y estados de E.E.U.U. \\
+	
+	Bajo este diseño, los estudiantes de kínder de raza negra fueron expuestos de manera aleatoria a profesores de la misma raza o de razas distintas \emph{condicional en el colegio}. En consecuencia, haciendo uso de sus conocimientos sobre diseños experimentales, usted estima la siguiente ecuación:
+	
+	\begin{equation}\label{eq:main_spec}
+		Y_i = \beta_0 + \beta_1 D_i + \varepsilon_i.
+	\end{equation}
+	
+	\vspace{0.3cm}
+	
+	\begin{enumerate}[resume]
+		
+		\item Usando el caso estudio, identifique qué factores pueden generar una mayor varianza estimada por parte de los errores estándar clusterizados a nivel de colegio. Para ello:
+		
+		\begin{itemize}
+			
+			\item Usando el estimador que usted propuso en el \textbf{caso 3 inciso 3}, enuncie qué mecanismo matemáticos incrementan la varianza estimada.
+			
+			\item Por cada uno de los mecanismos hallados, de un ejemplo concreto usando el contexto del caso estudio que lo respalde.
+			
+			\vspace{0.15cm}
+			
+			\item Estime el modelo~\eqref{eq:main_spec} utilizando como variable dependiente: i) el puntaje en matemáticas del SAT y ii) la probabilidad de ingresar a la universidad. Reporte los resultados en una tabla, incluyendo errores estándar robustos a heterocedasticidad y errores estándar clusterizados a nivel de colegio.
+			
+		\end{itemize}
+		
+		\input{answers/ej2_5}
+		
+	\end{enumerate}
+	
+	\vspace{0.3cm}
+	
+	Ustedes envían sus resultados para consideración en una revista de alto prestigio académico. Tras un tiempo, reciben dos comentarios por parte de los \textit{referees}, es decir, los evaluadores encargados de determinar si la contribución del artículo es publicable. En particular, los comentarios reflejan posiciones contradictorias respecto de la decisión de reportar errores estándar clusterizados a nivel de colegio:
+	
+	\vspace{0.3cm}
+	
+	\begin{tcolorbox}[colframe=gray!40!black, colback=gray!5!white, title=Referee \#1]
+		
+		``La decisión de clusterizar los errores estándar a nivel de colegio está bien motivada y es consistente con la literatura metodológica existente. Dado el diseño experimental y la evidencia empírica que presentan sobre la correlación intra-colegio, este nivel de clusterización parece apropiado, y los resultados son robustos bajo esta especificación.''
+		
+	\end{tcolorbox}
+	
+	\vspace{0.3cm}
+	
+	\begin{tcolorbox}[colframe=gray!40!black, colback=gray!5!white, title=Referee \#2]
+		
+		``No queda claro por qué los autores se limitan a clusterizar los errores estándar a nivel de colegio cuando disponen de información que permitiría hacerlo a niveles más agregados, como el condado o el estado. En muestras grandes como la suya, aumentar el nivel de agregación rara vez es problemático y puede ofrecer una inferencia más conservadora. Como regla práctica, recomendaría siempre reportar errores estándar clusterizados al nivel más agregado, en lugar de decidir ex-ante si se debe clusterizar y evitar pensar en la existencia de un nivel apropiado.''
+		
+	\end{tcolorbox}
+	
+	\vspace{0.3cm}
+	
+	\begin{enumerate}[resume]
+		
+		\item ¿Qué posible impacto puede tener un nivel de agregación más grande al clusterizar sobre la varianza estimada? Use como guía los siguientes puntos:
+		
+		\begin{itemize}
+			
+			\item Use el estimador de la varianza que usted propuso en el \textbf{inciso 3, caso 3} y compare la varianza teórica que se obtiene al clusterizar por colegio vs por condado.
+			
+			\item Repita las estimaciones del \textbf{inciso 5}, concentrándose únicamente en la variable $Y_i$ correspondiente al puntaje de matemáticas en la prueba SAT. Reporte los coeficientes estimados junto con errores estándar robustos a heterocedasticidad y errores estándar clusterizados a nivel de: i) salón, ii) colegio, iii) condado y iv) estado. 
+			
+			\item Interprete los resultados obtenidos. ¿Las estimaciones son consistentes con lo que usted encuentra teóricamente?
+			
+		\end{itemize}
+		
+		\input{answers/ej2_6}
+		
+		\item Usted decide escribirle a su amiga cercana \href{https://www.gsb.stanford.edu/faculty-research/faculty/susan-athey}{Susan Athey} para pedirle su opinión sobre el comentario hecho por el referee \#2. Ella le envía el siguiente código de $R$:
+		
+		\vspace{0.3cm}
+		
+		\lstinputlisting[caption={\textbf{Código de Susan Athey}}, label={lst:cluster_simul}]{code/simul-clusters.R}
+		
+		Usando ese código, realice el siguiente procedimiento:
+		
+		\begin{itemize}
+			\item Tome $1'000$ muestras de la población de interés y estime el modelo~\eqref{eq:main_spec} usando errores estándar robustos a heterocedasticidad y clusterizados a nivel de colegio.\footnote{\textbf{Pista:} Se recomienda usar los comandos vcovHC y vcovCL del paquete \textit{sandwich} para optimizar los resultados.}
+			
+			\vspace{0.15cm}
+			
+			\item Para cada una de las muestras, determine el intervalo de confianza al $95\%$ usando ambos errores estándar. 
+			
+			\vspace{0.15cm}
+			
+			\item Para cada una de las muestras, determine si el intervalo de confianza ``cubren'' el cero (es decir, el intervalo de confianza incluye el cero).\footnote{Note que, en la simulación, el efecto esperado es cero por construcción.}
+			
+			\vspace{0.15cm}
+			
+			\item Determine los errores estándar robustos a heterocedasticidad y clusterizados promedio.
+			
+			\vspace{0.15cm}
+			
+			\item Determine el porcentaje de veces que los intervalos de confianza ``cubren'' el cero. 
+			
+			\vspace{0.15cm}
+			
+			\item Reporte sus resultados completando la siguiente tabla: 
+			
+			\input{tables/cover_rate}
+			
+			\item Interprete sus resultados. ¿Es cierto que siempre es mejor clusterizar al nivel más agregado?
+			
+		\end{itemize}
+		
+		\input{answers/ej2_7}
+		
+		\item ¿Considera usted que el referee \#2 tiene razón? Escriba una breve respuesta a este comentario teniendo en cuenta los resultados del inciso anterior. Asegúrese de usar la tabla que construyó \textit{(máximo 200 palabras)}.
+		
+		\input{answers/ej2_8}
+		
+	\end{enumerate}
+	
+	
+	%---------------------------------------------------------------------
+	% PREGUNTA 3
+	%---------------------------------------------------------------------
+	\newpage
+	\section*{Tercer Ejercicio}
+	
+	Los experimentos aleatorizados controlados (RCTs, por sus siglas en inglés) se han consolidado como el estándar para la evaluación de políticas públicas y programas de desarrollo. A diferencia de los estudios observacionales, los RCTs permiten establecer relaciones causales mediante la aleatorización del tratamiento, lo cual elimina el sesgo de selección y garantiza que las diferencias observadas entre grupos sean atribuibles únicamente a la intervención evaluada. No obstante, la credibilidad de estos estudios depende de manera crítica de la \textbf{replicabilidad}: la capacidad de otros investigadores de reproducir los resultados utilizando los mismos datos y métodos.
+	
+	\bigbreak
+	
+	El estudio de \href{https://www.aeaweb.org/articles?id=10.1257/aer.20241305}{Dupas et al. (2025)}, publicado en la \textit{American Economic Review}, implementa un RCT a gran escala en Burkina Faso con 14,545 mujeres distribuidas en 499 aldeas, 100 centros de salud y 20 provincias, empleando múltiples niveles de aleatorización y estratificación. Los resultados desafían décadas de políticas públicas: \textbf{el acceso completamente gratuito a anticonceptivos no redujo la fecundidad ni incrementó su uso}. Este hallazgo nulo tiene profundas implicaciones para programas de desarrollo que representan miles de millones de dólares en inversión. Dada la naturaleza contraintuitiva de estos resultados, resulta particularmente valioso comprender cómo los investigadores garantizaron la robustez de sus conclusiones, desde el diseño experimental hasta el análisis de datos. Este ejercicio le permitirá verificar la replicabilidad de los resultados principales del estudio de \href{https://www.aeaweb.org/articles?id=10.1257/aer.20241305}{Dupas et al. (2025)}. Para ello, deberá familiarizarse tanto con el artículo como con su paquete de replicación. Se recomienda enfáticamente la lectura del texto original para facilitar la solución de este ejercicio, a la hora de evaluar sus respuestas vamos a buscar evidencia de lo anterior.
+	
+	
+	\bigbreak
+	
+	\textbf{Datos disponibles:} Para este ejercicio utilizará muestras aleatorias del 60\% de los datos originales, porque el resto se perdieron (vamos a asumir esto para el ejercicio):
+	
+	\begin{itemize}
+		\item \texttt{baseline\_sample.dta}: Muestra del 60\% de la encuesta de línea base (primavera 2018).
+		\item \texttt{endline\_sample.dta}: Muestra emparejada del 60\% de la encuesta de seguimiento (primavera 2021). Menor N que baseline debido a atrición.
+		\item \texttt{listing\_sample.dta}: Censo de hogares en las aldeas incluidas en la muestra.
+		\item Puede usar el \texttt{codebook.xlsx} del paquete de replicación para identificar las variables.
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item \textbf{Diseño experimental:} Antes de poder verificar los resultados de un estudio, es fundamental entender cómo fue diseñado e implementado el experimento. El diseño experimental no solo determina qué preguntas pueden responderse, sino también qué supuestos son necesarios para la identificación causal y qué amenazas a la validez interna deben considerarse. 
+		
+		Describa el diseño experimental del estudio de Dupas et al. (2025). Explique cómo fue implementada la aleatorización (incluyendo los diferentes niveles y la estratificación), qué tratamientos fueron aleatorizados y los principales desafíos metodológicos que enfrentaron los autores durante la implementación del estudio. (máx. 300 palabras)
+		
+		\input{answers/ej3_1}
+		
+		\item \textbf{Marco de Resultados Potenciales:} 
+		\begin{enumerate}
+			\item Defina formalmente la variable de asignación al tratamiento de subsidio ($D_i$) donde $i$ indexa a cada mujer. Presente los posibles valores que puede tomar esta variable.
+			
+			\input{answers/ej3_2a}
+			
+			\item Defina los resultados potenciales para la variable de interés principal: $Y_i$ = tuvo al menos un nacimiento durante los 3 años del estudio. ¿Cuántos resultados potenciales existen para cada mujer?
+			
+			\input{answers/ej3_2b}
+			
+			\item Los autores decidieron que el grupo ``control'' recibiera un subsidio del 10\% en lugar de no recibir nada. ¿Por qué esta decisión tiene sentido desde una perspectiva ética? ¿Qué parámetro causal están estimando entonces? (máx. 100 palabras)
+			
+			\input{answers/ej3_2c}
+		\end{enumerate}
+		
+		\item \textbf{Supuestos de Identificación:}
+		\begin{enumerate}
+			\item Liste los tres supuestos principales necesarios para identificar el efecto causal del subsidio completo sobre fecundidad. Incluya las expresiones matemáticas para aquellos supuestos que sea posible.
+			
+			\input{answers/ej3_3a}
+			
+			\item La aleatorización fue estratificada por provincia. Escriba matemáticamente el supuesto de independencia condicional apropiado para este diseño.
+			
+			\input{answers/ej3_3b}
+		\end{enumerate}
+		
+		\item \textbf{Replicación de Balance Muestral - Tabla A.1:} 
+		
+		Los autores reportan pruebas de balance en la Tabla A.1 del Apéndice. Su tarea es replicar el Panel A (características de las mujeres) utilizando \texttt{baseline\_sample.dta}, una muestra aleatoria del 60\% de los datos originales.\footnote{Sus resultados serán similares pero no idénticos a los del paper debido al tamaño muestral.}
+		
+		
+		\begin{enumerate}
+			\item Construya las variables analíticas necesarias para replicar las siguientes variables de la Tabla A.1:
+			\begin{itemize}
+				\item Edad de la mujer
+				\item La mujer reporta que su esposo es polígamo
+				\item Número total de hijos deseados por la mujer
+				\item Uso actual de anticoncepción moderna
+				\item La necesidad de la mujer por anticonceptivos está insatisfecha
+				\item No podría pagar por anticonceptivos si quisiera usarlos
+				\item El hogar tiene radio
+				
+			\end{itemize}
+			
+			\input{answers/ej3_4a}
+			
+			\item Para cada una de las siete variables, estime una regresión de balance de la forma:
+			\[
+			X_i = \alpha + \beta \cdot \text{Tratamiento}_i + \gamma_{\text{provincia}} + \varepsilon_i,
+			\]
+			con errores estándar agrupados (clusterizados) a nivel de centro de salud.
+			
+			Para cada variable reporte: (i) el coeficiente del tratamiento, (ii) el error estándar entre paréntesis, (iii) el valor-p, (iv) la media del grupo control y (v) el tamaño de muestra (N). 
+			
+			Calcule además el estadístico F conjunto (y su valor-p) para la hipótesis de que todos los coeficientes son iguales a cero.
+			
+			\input{answers/ej3_4b}
+			
+			\item Compare sus resultados con la Tabla A.1 del paper. ¿Hay evidencia de desbalance entre tratamiento y control? ¿Qué concluye sobre la correcta implementación de la aleatorización? (máx. 150 palabras)
+			
+			\input{answers/ej3_4c}
+			
+			\item Analice las estadísticas descriptivas de la muestra. ¿Qué nos dicen sobre la población estudiada y sobre la plausibilidad y dirección del efecto esperado del tratamiento? Interprete.
+			(máx. 200 palabras).
+			
+			\input{answers/ej3_4d}
+		\end{enumerate}
+		
+		\item \textbf{Replicación de Resultados Principales - Tabla 2:} 
+		
+		Use \texttt{baseline\_sample.dta} y \texttt{endline\_sample.dta}. Tenga en cuenta que el endline tiene menos observaciones debido a la atrición de las participantes.
+		
+		\begin{enumerate}
+			\item Construya las variables de resultado, realice el merge entre bases y reporte la tasa de atrición (total y por grupo de tratamiento). Reporte el atrición como tasas (\%) y como número de observaciones (N).
+			
+			\input{answers/ej3_5a}
+			
+			\item Escriba la ecuación econométrica que estima el efecto ITT del subsidio sobre fecundidad. Identifique claramente todos los componentes del modelo.
+			
+			\input{answers/ej3_5b}
+			
+			\item Estime el efecto ITT del subsidio (100\% vs 10\%) para los cuatro resultados principales. Replique la Tabla 2 del artículo (sin contar la columna 4).
+			
+			\input{answers/ej3_5c}
+			
+		\end{enumerate}
+		
+		\item \textbf{Validez de Supuestos:}
+		
+		\begin{enumerate}
+			\item En julio de 2020, el gobierno anunció la gratuidad nacional de la anticoncepción. Explique:  
+			(i) de qué manera este anuncio puede violar el supuesto SUTVA,  
+			(ii) cuál sería la dirección esperada del sesgo que introduce, y  
+			(iii) si considera convincente el argumento de los autores basado en la implementación gradual de la política y en el rezago biológico de nueve meses para observar nacimientos.   (máx. 200 palabras)
+			
+			\input{answers/ej3_6a}
+			
+			\item Defina y proporcione ejemplos en el contexto de este estudio de los siguientes efectos: Hawthorne, John Henry, demanda del experimentador (experimenter demand) y placebo.  
+			¿En qué dirección sesgaría cada uno de estos efectos los resultados estimados?
+			
+			\input{answers/ej3_6b}
+		\end{enumerate}
+		
+		\item \textbf{Robustez del Hallazgo Nulo:}
+		
+		El resultado principal es nulo: no hay efecto sobre fecundidad. Los nulos requieren cuidado especial.
+		
+		\begin{enumerate}
+			\item Revise su Tabla 2. ¿Aumentó el subsidio el uso de anticoncepción? ¿Y el uso de vouchers? Interpete estos reusltados conjuntamente.
+			
+			\input{answers/ej3_7a}
+			
+			\item ¿Son los resultados nulos consistentes? ¿Qué tan robusto es el hallazgo? \textit{(Pista: leer la lectura)}
+			
+			\input{answers/ej3_7b}
+		\end{enumerate}
+		
+	\end{enumerate}
+	
+\end{document}

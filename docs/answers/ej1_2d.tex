@@ -1,0 +1,20 @@
+\begin{tcolorbox}
+No es necesariamente cierto que $\tau_{\text{ing}} = \text{ATT}$ implique $\tau_{\text{ing}} = \text{ATU}$.
+
+Si $\tau_{\text{ing}} = \text{ATT}$, del resultado del punto (a) se ve que el sesgo de selección es cero:
+\[
+\mathbb{E}[Y_i(0) \mid D_i = 1] = \mathbb{E}[Y_i(0) \mid D_i = 0].
+\]
+
+Pero del resultado del punto (b):
+\[
+\tau_{\text{ing}} = \text{ATU} + \bigl(\mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(1) \mid D_i = 0]\bigr).
+\]
+
+Para que $\tau_{\text{ing}} = \text{ATU}$ también se cumpla, se requeriría adicionalmente que:
+\[
+\mathbb{E}[Y_i(1) \mid D_i = 1] = \mathbb{E}[Y_i(1) \mid D_i = 0].
+\]
+
+Estas condiciones son independientes entre sí. Como ejemplo, se puede suponer que los estudiantes del aula tecnológica son intrínsecamente más hábiles y, por tanto, obtendrían puntajes más altos incluso con el programa ($\mathbb{E}[Y_i(1) \mid D_i = 1] > \mathbb{E}[Y_i(1) \mid D_i = 0]$), mientras que en ausencia del programa sus puntajes coinciden con los del salón regular ($\mathbb{E}[Y_i(0) \mid D_i = 1] = \mathbb{E}[Y_i(0) \mid D_i = 0]$). En ese caso $\tau_{\text{ing}} = \text{ATT}$ pero $\tau_{\text{ing}} > \text{ATU}$, por lo que la implicación no se cumple.
+\end{tcolorbox}

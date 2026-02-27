@@ -1,0 +1,31 @@
+\begin{tcolorbox}
+Partiendo de que un estimador $\hat\theta_N$ es consistente para $\theta$ si converge en probabilidad al parámetro verdadero:
+\[
+\hat\theta_N \xrightarrow{p} \theta \qquad (N \to \infty),
+\]
+es decir, para todo $\varepsilon > 0$, $\lim_{N\to\infty}\mathbb{P}(|\hat\theta_N - \theta| > \varepsilon) = 0$.
+
+Suponiendo aleatorización, $\{Y_i(0), Y_i(1)\} \perp D_i$. En particular:
+\[
+\mathbb{E}[Y_i(1) \mid D_i = 1] = \mathbb{E}[Y_i(1)]
+\qquad \text{y} \qquad
+\mathbb{E}[Y_i(0) \mid D_i = 0] = \mathbb{E}[Y_i(0)].
+\]
+
+Los $\{Y_i(1) : D_i = 1\}$ son i.i.d. con media $\mathbb{E}[Y_i(1) \mid D_i = 1] = \mathbb{E}[Y_i(1)]$. Por la ley de grandes números, cuando $N_1 \to \infty$:
+\[
+\bar{Y}_1 = \frac{1}{N_1}\sum_{i:\,D_i=1} Y_i(1) \xrightarrow{p} \mathbb{E}[Y_i(1) \mid D_i = 1] = \mathbb{E}[Y_i(1)].
+\]
+
+De la misma forma, cuando $N_0 \to \infty$:
+\[
+\bar{Y}_0 = \frac{1}{N_0}\sum_{i:\,D_i=0} Y_i(0) \xrightarrow{p} \mathbb{E}[Y_i(0) \mid D_i = 0] = \mathbb{E}[Y_i(0)].
+\]
+
+Por el teorema de mapeo continuo, que intuitivamente quiere decir que la resta es una función continua:
+\[
+\hat\tau_{\text{DM}} = \bar{Y}_1 - \bar{Y}_0 \xrightarrow{p} \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)]
+\]
+
+La última igualdad usa que bajo independencia $\mathbb{E}[Y_i(1) - Y_i(0) \mid D_i] = \mathbb{E}[Y_i(1) - Y_i(0)]$. La consistencia garantiza que, con muestras grandes en ambos grupos, la diferencia de medias converge al efecto causal real del programa, eliminando el sesgo de selección asintóticamente.
+\end{tcolorbox}

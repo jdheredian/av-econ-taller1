@@ -1,0 +1,15 @@
+\begin{tcolorbox}
+El estimador propuesto por el colega es:
+\[
+\frac{\sum_i \sum_j x_i x_j \hat\varepsilon_i \hat\varepsilon_j}{\left(\sum_i x_i\right)^2}.
+\]
+
+El numerador puede reescribirse como $\left(\sum_i x_i \hat\varepsilon_i\right)^2$. Sin embargo, por la condición de primer orden del estimador MCO: $\sum_i x_i \hat\varepsilon_i = 0$. Por esto, el numerador es cero y el estimador entrega varianza igual a cero para cualquier muestra, lo que es incorrecto.
+\\
+El estimador del inciso 2, caso 3 es:
+\[
+\hat{\mathbb{V}}_{\text{CL}}[\hat\beta] = \frac{\sum_g \left(\sum_{i \in g} x_i \hat\varepsilon_i\right)^2}{\left(\sum_i x_i^2\right)^2}.
+\]
+
+La diferencia es que la suma del numerador se realiza primero dentro de cada cluster $g$ y luego se suman los cuadrados de esas sumas por cluster. Aunque $\sum_g \sum_{i \in g} x_i \hat\varepsilon_i = 0$ (la suma total sigue siendo cero), los términos $\sum_{i \in g} x_i \hat\varepsilon_i$ para cada colegio $g$ son, en promedio, distintos de cero. El estimador clusterizado captura la variación de estos residuos ponderados a nivel de colegio, que refleja la correlación intra-cluster en los errores. Además, el denominador correcto es $(\sum_i x_i^2)^2$, no $(\sum_i x_i)^2$, ya que el denominador del estimador MCO es $\sum_i x_i^2$.
+\end{tcolorbox}

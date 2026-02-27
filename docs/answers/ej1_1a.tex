@@ -1,0 +1,9 @@
+\begin{tcolorbox}
+Los resultados potenciales del estudiante $i$ se definen como:
+\begin{itemize}
+    \item $Y_i(1)$: puntaje en el test de habilidades cognitivas si el estudiante $i$ fue asignado al aula tecnológica.
+    \item $Y_i(0)$: puntaje en el test de habilidades cognitivas si el estudiante $i$ permaneció en el salón regular.
+\end{itemize}
+
+El resultado observado se escribe como $Y_i = D_i \times Y_i(1) + (1 - D_i) \times Y_i(0)$, donde $D_i \in \{0, 1\}$ indica la asignación al tratamiento. En este caso, el problema de inferencia causal está en que, para cada estudiante, solo uno de los dos resultados potenciales es observable. Si $D_i = 1$, se observa $Y_i = Y_i(1)$ pero $Y_i(0)$ no. Si $D_i = 0$, ocurre lo contrario. Esta restricción hace imposible calcular el efecto individual $Y_i(1) - Y_i(0)$ para cualquier estudiante.
+\end{tcolorbox}

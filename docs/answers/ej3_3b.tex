@@ -1,0 +1,7 @@
+\begin{tcolorbox}
+Dado que la aleatorización se realizó dentro de cada provincia, el supuesto de independencia pertinente es el de {independencia condicional}. Sea $P_i \in \{1, 2, \ldots, 20\}$ la provincia a la que pertenece la mujer $i$. El supuesto se escribe:
+\[
+\{Y_i(0),\, Y_i(1)\} \perp D_i \mid P_i.
+\]
+Esto significa que, dentro de cada provincia, la asignación de centros de salud al tratamiento es independiente de los resultados potenciales. La estratificación garantiza que en cada estrato (provincia) haya tanto centros de tratamiento como de control, lo que elimina la posibilidad de que diferencias sistemáticas entre provincias confundan la estimación. En la práctica, este supuesto se satisface por diseño: la aleatorización se realizó de forma estratificada por las 20 provincias, asegurando representación equilibrada dentro de cada una. La ecuación de regresión incorpora esta estratificación mediante efectos fijos de provincia $\gamma_p$.
+\end{tcolorbox}

@@ -1,0 +1,32 @@
+\begin{tcolorbox}
+Partiendo del mismo punto de la demostración anterior:
+\begin{align*}
+\tau_{\text{ing}}
+  &= \mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(0) \mid D_i = 0].
+\end{align*}
+
+Se suma y resta un contrafactual, concretamente $\mathbb{E}[Y_i(1) \mid D_i = 0]$:
+\begin{align*}
+\tau_{\text{ing}}
+  &= \mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(1) \mid D_i = 0]
+     + \mathbb{E}[Y_i(1) \mid D_i = 0] - \mathbb{E}[Y_i(0) \mid D_i = 0].
+\end{align*}
+
+Reeorganizando, se ve que el segundo par de términos es el ATU por definición:
+\[
+\text{ATU} = \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 0]
+           = \mathbb{E}[Y_i(1) \mid D_i = 0] - \mathbb{E}[Y_i(0) \mid D_i = 0].
+\]
+
+Y el primer par de términos es el sesgo de selección en $Y_i(1)$:
+\[
+\text{Sesgo en } Y_i(1) = \mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(1) \mid D_i = 0].
+\]
+
+Reordenando:
+\[
+\tau_{\text{ing}} = \underbrace{\mathbb{E}[Y_i(1) \mid D_i = 0] - \mathbb{E}[Y_i(0) \mid D_i = 0]}_{\text{ATU}} + \underbrace{\mathbb{E}[Y_i(1) \mid D_i = 1] - \mathbb{E}[Y_i(1) \mid D_i = 0]}_{\text{Sesgo de selección en } Y_i(1)}.
+\]
+
+Este sesgo captura si los tratados obtendrían puntajes con el programa distintos a los del grupo de control. Si los estudiantes del aula tecnológica, inherentemente, tuvieran puntajes con tratamiento más altos por capacidad propia, $\tau_{\text{ing}}$ sobreestima el ATU.
+\end{tcolorbox}

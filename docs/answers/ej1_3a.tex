@@ -1,0 +1,53 @@
+\begin{tcolorbox}
+Basandose en el modelo $Y_i = \beta_0 + \tau D_i + u_i$ con $D_i \in \{0,1\}$, las condiciones de primer orden del estimador MCO son:
+\[
+\frac{\partial}{\partial \hat\beta_0}\sum_i(Y_i - \hat\beta_0 - \hat\tau D_i)^2 = 0
+\implies
+\sum_i (Y_i - \hat\beta_0 - \hat\tau D_i) = 0,
+\]
+\[
+\frac{\partial}{\partial \hat\tau}\sum_i(Y_i - \hat\beta_0 - \hat\tau D_i)^2 = 0
+\implies
+\sum_i D_i(Y_i - \hat\beta_0 - \hat\tau D_i) = 0.
+\]
+
+Se recuelve para $\hat\beta_0$. De la primera condición:
+\[
+\sum_i Y_i = N\hat\beta_0 + \hat\tau \sum_i D_i
+\implies
+\hat\beta_0 = \bar{Y} - \hat\tau\,\bar{D},
+\]
+donde $\bar{Y} = \frac{1}{N}\sum_i Y_i$ y $\bar{D} = \frac{N_1}{N}$.
+
+Se resuelve para $\hat\tau$. Sustituimos $\hat\beta_0$ en la segunda condición y usamos que $D_i^2 = D_i$ para $D_i \in \{0,1\}$:
+\begin{align*}
+0 &= \sum_i D_i Y_i - \hat\beta_0 \sum_i D_i - \hat\tau \sum_i D_i^2 \\
+  &= \sum_i D_i Y_i - (\bar{Y} - \hat\tau\bar{D})N_1 - \hat\tau N_1 \\
+  &= \sum_i D_i Y_i - N_1\bar{Y} + \hat\tau N_1\bar{D} - \hat\tau N_1 \\
+  &= \sum_i D_i Y_i - N_1\bar{Y} - \hat\tau N_1(1 - \bar{D}).
+\end{align*}
+
+Despejando $\hat\tau$:
+\[
+\hat\tau = \frac{\sum_i D_i Y_i - N_1\bar{Y}}{N_1(1-\bar{D})}.
+\]
+
+Separamos $\bar{Y} = \frac{N_1\bar{Y}_1 + N_0\bar{Y}_0}{N}$:
+\begin{align*}
+\sum_i D_i Y_i - N_1\bar{Y}
+  &= N_1\bar{Y}_1 - N_1\cdot\frac{N_1\bar{Y}_1 + N_0\bar{Y}_0}{N} \\
+  &= N_1\bar{Y}_1\Bigl(1 - \frac{N_1}{N}\Bigr) - N_1\frac{N_0}{N}\bar{Y}_0 \\
+  &= N_1\frac{N_0}{N}\bar{Y}_1 - N_1\frac{N_0}{N}\bar{Y}_0 \\
+  &= \frac{N_1 N_0}{N}(\bar{Y}_1 - \bar{Y}_0)
+\end{align*}
+
+Como $\bar{D} = N_1/N$:
+\[
+N_1(1-\bar{D}) = N_1\Bigl(1 - \frac{N_1}{N}\Bigr) = N_1\cdot\frac{N_0}{N} = \frac{N_1 N_0}{N}
+\]
+
+Dividiendo:
+\[
+\hat\tau_{\text{MCO}} = \frac{N_1 N_0/N\,(\bar{Y}_1 - \bar{Y}_0)}{N_1 N_0/N} = \bar{Y}_1 - \bar{Y}_0 = \hat\tau_{\text{DM}}
+\]
+\end{tcolorbox}

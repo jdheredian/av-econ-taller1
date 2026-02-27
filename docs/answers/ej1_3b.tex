@@ -1,0 +1,15 @@
+\begin{tcolorbox}
+Para que $\hat\tau_{\text{DM}}$ sea un estimador insesgado del efecto causal promedio se requiere que:
+
+\[
+\mathbb{E}[\hat\tau_{\text{DM}}] = \text{ATE} = \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)].
+\]
+
+Dado que $\mathbb{E}[\hat\tau_{\text{DM}}] = \mathbb{E}[Y_i(1) \mid D_i=1] - \mathbb{E}[Y_i(0) \mid D_i=0]$, esta condición exige que el tratamiento sea independiente de los resultados potenciales:
+
+\[
+\{Y_i(0),\, Y_i(1)\} \perp D_i.
+\]
+
+Esto se satisface cuando la asignación al tratamiento es aleatoria. En el contexto del caso, se necesita que el mecanismo por el cuallos estudiantes fueron asignados a cada salón sea independiente de su capacidad cognitiva potencial. Si el salón fue elegido de forma no aleatoria, como seleccionar el salón con mejores estudiantes, el sesgo de selección sería distinto de cero y $\hat\tau_{\text{DM}}$ no identificaría el ATE.
+\end{tcolorbox}

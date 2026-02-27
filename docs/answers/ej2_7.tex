@@ -1,0 +1,19 @@
+\begin{tcolorbox}
+La simulación toma 1,000 muestras del 1\% de una población de 10 millones de estudiantes distribuidos en 100 colegios. Los primeros 50 colegios tienen un efecto de tratamiento de $+1$ y los últimos 50 de $-1$; el efecto promedio del tratamiento es cero por construcción. La Tabla~\ref{tab:cover_rate} reporta los resultados.
+
+\begin{center}
+\begin{tabular}{cccc}
+\hline
+\multicolumn{2}{c}{Heterocedasticidad} & \multicolumn{2}{c}{Cluster} \\
+\midrule
+$\hat{\mathbb{V}}$ Promedio & $\%$ Cobertura & $\hat{\mathbb{V}}$ Promedio & $\%$ Cobertura \\
+\midrule
+0.000023 & 94.7\% & 0.010124 & 100.0\% \\
+\hline
+\end{tabular}
+\end{center}
+
+El error estándar robusto a heterocedasticidad presenta una varianza promedio de $\hat{\mathbb{V}}_{\text{HC}} = 0.000023$ ($\text{SE} \approx 0.005$) y una tasa de cobertura del 94.7\%, próxima al nivel nominal del 95\%. El estimador clusterizado a nivel de colegio presenta una varianza promedio mucho mayor, $\hat{\mathbb{V}}_{\text{CL}} = 0.010124$ ($\text{SE} \approx 0.101$), y una cobertura del 100\%, lo que indica sobrecobertura.
+
+El proceso generadror de los datos de la simulación genera heterogeneidad en el efecto del tratamiento {entre colegios} (school\_effect$_g = \pm 1$), pero no correlación en los errores {dentro} de un colegio. Dentro de cada colegio, los tratamientos son asignados de forma independiente entre estudiantes, lo que hace que la covarianza intra-cluster de los errores sea nula. El estimador robusto a heterocedasticidad captura correctamente esta estructura y produce cobertura nominal. El estimador clusterizado, en cambio, captura los patrones sistemáticos entre colegios (el hecho de que todos los estudiantes del mismo colegio comparten el mismo efecto) e infla la varianza estimada de forma sustancial, produciendo intervalos de confianza innecesariamente amplios. Esto no es cierto que siempre sea mejor clusterizar al nivel más agregado: cuando la correlación intra-cluster de los errores es baja o inexistente, clusterizar penaliza la inferencia sin ganar validez.
+\end{tcolorbox}

@@ -1,0 +1,14 @@
+\begin{tcolorbox}
+Los tres parámetros causales se definen como:
+
+\begin{align*}
+\text{ATE} &= \mathbb{E}[Y_i(1) - Y_i(0)] = \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)] \\[4pt]
+\text{ATT} &= \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 1] \\[4pt]
+\text{ATU} &= \mathbb{E}[Y_i(1) - Y_i(0) \mid D_i = 0]
+\end{align*}
+\begin{enumerate}
+    \item ATE: El efecto promedio del tratamiento. Es el promedio del efecto del programa en el puntaje cognitivo para un estudiante tomado al azar de la muestra, sin distinción de a qué salón fue asignado.
+    \item ATT: El efecto promedio en los tratado. Es el efecto promedio del programa para los estudiantes que efectivamente fueron asignados al Aula Tecnológica. Responde a la pregunta de si el programa fue beneficioso para quienes lo recibieron.
+    \item ATU: El efecto promedio en los no tratados. Es el efecto promedio del programa para los estudiantes que permanecieron en el salón regular. Responde a la pregunta de qué habría ocurrido con el puntaje de esos estudiantes si hubieran participado en el programa.
+\end{enumerate}
+\end{tcolorbox}

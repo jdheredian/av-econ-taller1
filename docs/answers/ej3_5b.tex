@@ -1,0 +1,16 @@
+\begin{tcolorbox}
+La ecuación econométrica que estima el efecto ITT del subsidio sobre cada resultado $Y_i$ es:
+\[
+Y_i = \alpha + \beta \cdot D_i + \sum_{p=1}^{20} \gamma_p \cdot \mathbf{1}[P_i = p] + \varepsilon_i,
+\]
+donde:
+\begin{itemize}
+    \item $Y_i$: resultado de la mujer $i$ observado en la encuesta de seguimiento.
+    \item $\alpha$: intercepto (media del grupo de control en la provincia de referencia).
+    \item $\beta$: coeficiente de interés, el efecto ITT del subsidio del 100\% relativo al 10\%. Bajo el supuesto de independencia condicional e SUTVA, $\beta = \mathbb{E}[Y_i(1) - Y_i(0)]$.
+    \item $D_i \in \{0,1\}$: indicador de tratamiento (1 = subsidio del 100\%).
+    \item $\gamma_p$: efecto fijo de la provincia $p$; controla por diferencias sistemáticas entre las 20 provincias que motivaron la estratificación.
+    \item $\mathbf{1}[P_i = p]$: indicador de que la mujer $i$ pertenece a la provincia $p$.
+    \item $\varepsilon_i$: término de error. Los errores estándar se clusterizan a nivel de centro de salud (CSPS) para capturar la correlación intra-cluster generada por la aleatorización a ese nivel.
+\end{itemize}
+\end{tcolorbox}
