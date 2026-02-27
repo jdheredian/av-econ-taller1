@@ -1,0 +1,8 @@
+project:
+  root: "/Users/juandiegoheredianino/Library/CloudStorage/OneDrive-Universidaddelosandes/Maestría/20261 Econometría Avanzada/av-econ-taller1"
+
+data:
+  raw: "/Users/juandiegoheredianino/Library/CloudStorage/OneDrive-Universidaddelosandes/Maestría/20261 Econometría Avanzada/av-econ-taller1/data/raw"
+
+outputs:
+  tables: "/Users/juandiegoheredianino/Library/CloudStorage/OneDrive-Universidaddelosandes/Maestría/20261 Econometría Avanzada/av-econ-taller1/outputs/tables"

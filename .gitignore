@@ -1,6 +1,3 @@
-# Archivos de configuración local (NO versionar)
-**/paths.yml
-
 # Python
 __pycache__/
 *.py[cod]
